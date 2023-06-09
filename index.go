@@ -1,13 +1,15 @@
 package main
 
 import (
-	"net/http"
+	"fmt"
 	"log"
+	"net/http"
 	"os"
-    "github.com/joho/godotenv"
+
 	"github.com/gorilla/mux"
-	"gorm.io/driver/mysql"
-  	"gorm.io/gorm"
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 type User struct{
@@ -37,8 +39,17 @@ func main(){
 	r := mux.NewRouter()
 	
 	PORT := os.Getenv("PORT")
-	dsn := "root:udeXsP6p2Xokp1dVkfNT@tcp(containers-us-west-189.railway.app:7476)/railway?charset=utf8mb4&parseTime=True&loc=Local"
-  	db , err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	HOST := os.Getenv("HOST")
+	USER := os.Getenv("USER")
+	PASSWORD := os.Getenv("PASSWORD")
+	DB_NAME := os.Getenv("DB_NAME")
+	DB_PORT := os.Getenv("DB_PORT")
+	
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai",HOST,USER,PASSWORD ,DB_NAME,DB_PORT)
+	
+    print(dsn);
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
     Db = db;
 	if err != nil{
 		print("Nowww")	
