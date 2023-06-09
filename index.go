@@ -19,16 +19,24 @@ type User struct{
 }
 
 func HomeHandler( w http.ResponseWriter, r *http.Request){
-	Db.Create(&User{Username:"kasim",Password:"123123"})
-	var  new User
-	Db.First(&new)
+	
 	w.Write([]byte("welcome"))
 }
+
+
 var Db *gorm.DB
 
 func  GetDb() *gorm.DB {
 	return Db
 }
+
+func AddUser(w http.ResponseWriter, r *http.Request){
+	user := User{Username:"kasim",Password:"123123"}
+	Db.Create(&user)
+	id := fmt.Sprintf("%d",user.ID)
+	w.Write([]byte("welcome"+ id))
+}
+
 
 func main(){
 	err := godotenv.Load()
@@ -58,5 +66,7 @@ func main(){
 
 
 	r.HandleFunc("/", HomeHandler)
+
+	r.HandleFunc("/add", AddUser)
 	http.ListenAndServe("0.0.0.0:"+PORT,r)
 }
