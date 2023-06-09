@@ -32,9 +32,13 @@ func  GetDb() *gorm.DB {
 
 func AddUser(w http.ResponseWriter, r *http.Request){
 	user := User{Username:"kasim",Password:"123123"}
-	Db.Create(&user)
-	id := fmt.Sprintf("%d",user.ID)
-	w.Write([]byte("welcome"+ id))
+	result := Db.Create(&user)
+	if result.Error != nil {
+
+		log.Fatal("create problem")
+	}
+	//id := fmt.Sprintf("%d",user.ID)
+	w.Write([]byte("welcome"))
 }
 
 
@@ -60,7 +64,7 @@ func main(){
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
     Db = db;
 	if err != nil{
-		print("Nowww")	
+		log.Fatal("connecting problem")	
 	}
 	print("hello")
 
