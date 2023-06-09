@@ -24,5 +24,5 @@ func main(){
 
 
 	r.HandleFunc("/", HomeHandler)
-	http.ListenAndServe(PORT,r)
+	http.ListenAndServe("0.0.0.0:"+PORT,r)
 }
