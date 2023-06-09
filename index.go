@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	//"gorm.io/driver/postgres"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -57,8 +57,8 @@ func main(){
 	
     print(dsn);
 
-	//db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-    //Db = db;
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+    Db = db;
 	if err != nil{
 		print("Nowww")	
 	}
