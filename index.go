@@ -10,7 +10,16 @@ import (
   	"gorm.io/gorm"
 )
 
+type User struct{
+	gorm.Model
+	Username  string	`json : "username"`
+	Password  string	`json : "Password"`
+}
+
 func HomeHandler( w http.ResponseWriter, r *http.Request){
+	Db.Create(&User{Username:"kasim",Password:"123123"})
+	var  new User
+	Db.First(&new)
 	w.Write([]byte("welcome"))
 }
 var Db *gorm.DB
