@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
+	//"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -61,16 +61,16 @@ func main(){
 	
     print(dsn);
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-    Db = db;
-	if err != nil{
-		log.Fatal("connecting problem")	
-	}
-	print("hello")
+	// db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+    // Db = db;
+	// if err != nil{
+	// 	log.Fatal("connecting problem")	
+	// }
+	// print("hello")
 
 
 	r.HandleFunc("/", HomeHandler)
 
 	r.HandleFunc("/add", AddUser)
-	http.ListenAndServe(PORT,r)
+	http.ListenAndServe("0.0.0.0:"+ PORT,r)
 }
