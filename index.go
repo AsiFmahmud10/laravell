@@ -31,14 +31,14 @@ func  GetDb() *gorm.DB {
 }
 
 func AddUser(w http.ResponseWriter, r *http.Request){
-	// user := User{Username:"kasim",Password:"123123"}
-	// result := Db.Create(&user)
-	// if result.Error != nil {
+	user := User{Username:"kasim",Password:"123123"}
+	result := Db.Create(&user)
+	if result.Error != nil {
 
-	// 	log.Fatal("create problem")
-	// }
-	//id := fmt.Sprintf("%d",user.ID)
-	w.Write([]byte("welcome to add"))
+		log.Fatal("create problem")
+	}
+	id := fmt.Sprintf("%d",user.ID)
+	w.Write([]byte("welcome to add"+id))
 }
 
 
