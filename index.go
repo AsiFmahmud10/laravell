@@ -51,7 +51,7 @@ func main(){
 
 	r := mux.NewRouter()
 	
-	PORT := os.Getenv("PORT")
+	//PORT := os.Getenv("PORT")
 	// DB_HOST := os.Getenv("DB_HOST")
 	// DB_USER := os.Getenv("DB_USER")
 	// DB_PASSWORD := os.Getenv("DB_PASSWORD")
