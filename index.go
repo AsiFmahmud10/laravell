@@ -73,5 +73,5 @@ func main(){
 	r.HandleFunc("/", HomeHandler)
 
 	r.HandleFunc("/add", AddUser)
-	http.ListenAndServe("0.0.0.0" + PORT,r)
+	log.Fatal(http.ListenAndServe("0.0.0.0:80",r))
 }
