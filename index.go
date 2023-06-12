@@ -8,11 +8,13 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
-	//"gorm.io/driver/postgres"
+
+	
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-type User struct{
+type Users struct{
 	gorm.Model
 	Username  string	`json : "username"`
 	Password  string	`json : "Password"`
@@ -31,7 +33,7 @@ func  GetDb() *gorm.DB {
 }
 
 func AddUser(w http.ResponseWriter, r *http.Request){
-	user := User{Username:"kasim",Password:"123123"}
+	user := Users{Username:"kasim",Password:"123123"}
 	result := Db.Create(&user)
 	if result.Error != nil {
 
@@ -61,16 +63,16 @@ func main(){
 	
     print(dsn);
 
-	// db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-    // Db = db;
-	// if err != nil{
-	// 	log.Fatal("connecting problem")	
-	// }
-	// print("hello")
-
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+    Db = db;
+	if err != nil{
+		log.Fatal(err)	
+	}
+	print("hello")
+     db.AutoMigrate(&Users{})
 
 	r.HandleFunc("/", HomeHandler)
 
 	r.HandleFunc("/add", AddUser)
-	http.ListenAndServe("0.0.0.0:"+ PORT,r)
+	http.ListenAndServe( PORT,r)
 }
