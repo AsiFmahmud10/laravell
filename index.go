@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	//"os"
+	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 
-//	"gorm.io/driver/postgres"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -52,23 +52,23 @@ func main(){
 	r := mux.NewRouter()
 	
 	//PORT := os.Getenv("PORT")
-	// DB_HOST := os.Getenv("DB_HOST")
-	// DB_USER := os.Getenv("DB_USER")
-	// DB_PASSWORD := os.Getenv("DB_PASSWORD")
-	// DB_NAME := os.Getenv("DB_NAME")
-	// DB_PORT := os.Getenv("DB_PORT")
+	DB_HOST := os.Getenv("DB_HOST")
+	DB_USER := os.Getenv("DB_USER")
+	DB_PASSWORD := os.Getenv("DB_PASSWORD")
+	DB_NAME := os.Getenv("DB_NAME")
+	DB_PORT := os.Getenv("DB_PORT")
 	
-//	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai",DB_HOST,DB_USER,DB_PASSWORD ,DB_NAME,DB_PORT)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai",DB_HOST,DB_USER,DB_PASSWORD ,DB_NAME,DB_PORT)
 	
    // print(dsn);
 
-//	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
- //   Db = db;
+db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+   Db = db;
 	if err != nil{
 		log.Fatal(err)
 		print(err)	
 	}
-  //   db.AutoMigrate(&Users{})
+    db.AutoMigrate(&Users{})
 
 	r.HandleFunc("/", HomeHandler)
 
